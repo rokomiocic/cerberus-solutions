@@ -1,62 +1,33 @@
 <!DOCTYPE html>
-<html class="dark scroll-smooth" lang="hr">
+<html class="dark" lang="en">
 <head>
   <meta charset="utf-8" />
   <meta content="width=device-width, initial-scale=1.0" name="viewport" />
 
-  <title>Cerberus Solutions — Custom Software Development | Web & Mobile Apps</title>
-  <meta name="description" content="Cerberus Solutions builds high-performance web and mobile applications, dashboards, and custom software. From UI/UX to full-stack delivery, we turn your business ideas into production-ready products." />
+  <title>Cerberus Solutions — Custom Software Development | Web, Mobile & AI</title>
+  <meta name="description" content="Cerberus Solutions builds high-performance web and mobile applications, dashboards, AI products, and custom software. We ship everyone else's projects on time — our own site is just a running gag." />
   <link rel="canonical" href="https://cerberus-solutions.hr/" />
+  <meta name="theme-color" content="#070b08" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Cerberus Solutions — Custom Software Development" />
-  <meta property="og:description" content="High-performance web & mobile apps, data dashboards, and UI/UX — delivered by an expert engineering team." />
+  <meta property="og:description" content="High-performance web & mobile apps, dashboards, and AI — delivered by an expert engineering team. (Our own site? Still at 87%.)" />
   <meta property="og:url" content="https://cerberus-solutions.hr/" />
   <meta property="og:image" content="https://cerberus-solutions.hr/assets/images/hero.jpeg" />
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Cerberus Solutions — Custom Software Development" />
-  <meta name="twitter:description" content="Web & mobile apps, dashboards, and UI/UX, expertly crafted." />
+  <meta name="twitter:description" content="Web & mobile apps, dashboards, and AI, expertly crafted." />
   <meta name="twitter:image" content="https://cerberus-solutions.hr/assets/images/hero.jpeg" />
 
-  <!-- Favicon (optional) -->
   <link rel="icon" href="/favicon.ico" />
 
-  <!-- Tailwind -->
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link href="https://fonts.googleapis.com" rel="preconnect" />
-  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect" />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-
-  <script>
-    tailwind.config = {
-      darkMode: "class",
-      theme: {
-        extend: {
-          colors: {
-            "primary": "#1173d4",
-            "background-light": "#f6f7f8",
-            "background-dark": "#101922",
-          },
-          fontFamily: {
-            "display": ["Inter", "sans-serif"]
-          },
-          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
-        },
-      },
-    }
-  </script>
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings:'FILL' 0,'wght' 400,'GRAD' 0,'opsz' 24
-    }
-    /* Improve focus visibility for a11y */
-    :focus-visible { outline: 3px solid #1173d4; outline-offset: 3px; }
-  </style>
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&display=swap" rel="stylesheet" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -71,262 +42,298 @@
     "sameAs":[]
   }
   </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+
+    :root {
+      --green: #5ef38c;
+      --green-soft: rgba(94, 243, 140, 0.16);
+    }
+
+    body {
+      min-height: 100vh;
+      width: 100%;
+      background: radial-gradient(120% 120% at 50% 0%, #0e160f 0%, #070b08 55%, #050706 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px;
+      font-family: 'JetBrains Mono', ui-monospace, monospace;
+      position: relative;
+      overflow-x: hidden;
+      color: #cdebd6;
+    }
+
+    a { text-decoration: none; }
+
+    :focus-visible { outline: 2px solid var(--green); outline-offset: 3px; border-radius: 4px; }
+
+    @keyframes blink { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+    @keyframes barshimmer { 0% { background-position: 0 0; } 100% { background-position: 28px 0; } }
+    @keyframes glowpulse {
+      0%, 100% { box-shadow: 0 0 0 1px rgba(94,243,140,0.18), 0 30px 90px -30px rgba(94,243,140,0.22), inset 0 0 80px -40px rgba(94,243,140,0.25); }
+      50% { box-shadow: 0 0 0 1px rgba(94,243,140,0.3), 0 30px 90px -30px rgba(94,243,140,0.35), inset 0 0 80px -40px rgba(94,243,140,0.35); }
+    }
+    @keyframes flicker { 0%, 100% { opacity: 0.92; } 50% { opacity: 1; } }
+
+    .scanlines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: repeating-linear-gradient(to bottom, rgba(0,0,0,0) 0px, rgba(0,0,0,0) 2px, rgba(0,0,0,0.18) 3px, rgba(0,0,0,0) 4px);
+      mix-blend-mode: overlay;
+      z-index: 3;
+    }
+
+    .terminal {
+      width: 100%;
+      max-width: 780px;
+      background: #0a0f0b;
+      border-radius: 12px;
+      border: 1px solid var(--green-soft);
+      animation: glowpulse 5s ease-in-out infinite;
+      position: relative;
+      z-index: 2;
+    }
+
+    .titlebar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(94,243,140,0.12);
+      background: rgba(94,243,140,0.03);
+      border-radius: 12px 12px 0 0;
+    }
+    .dots { display: flex; gap: 8px; }
+    .dots span { width: 12px; height: 12px; border-radius: 50%; display: block; }
+    .titlebar .name { flex: 1; text-align: center; font-size: 12.5px; color: #7d8b80; letter-spacing: 0.02em; }
+    .live { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--green); }
+    .live .pulse { width: 7px; height: 7px; border-radius: 50%; background: var(--green); display: block; animation: flicker 1.4s ease-in-out infinite; }
+
+    .body { padding: 28px 30px 30px; }
+
+    .log { font-size: 13.5px; line-height: 1.95; min-height: 200px; }
+    .log .line { white-space: pre-wrap; }
+    .prompt { color: #3f7a52; }
+    .active { color: #cdebd6; white-space: pre-wrap; }
+    .spinner { color: var(--green); }
+    .cursor { display: inline-block; width: 9px; height: 16px; background: var(--green); margin-left: 3px; vertical-align: -3px; animation: blink 1s step-end infinite; }
+
+    .progress { margin-top: 26px; }
+    .progress .row { display: flex; justify-content: space-between; align-items: baseline; font-size: 12.5px; color: #9fb4a6; margin-bottom: 9px; }
+    .progress .pct { color: var(--green); font-weight: 700; font-variant-numeric: tabular-nums; }
+    .track { height: 14px; border-radius: 7px; background: rgba(94,243,140,0.08); border: 1px solid rgba(94,243,140,0.14); overflow: hidden; }
+    .fill {
+      height: 100%;
+      border-radius: 7px;
+      background-image: linear-gradient(135deg, #2f9d5a 25%, #5ef38c 25%, #5ef38c 50%, #2f9d5a 50%, #2f9d5a 75%, #5ef38c 75%);
+      background-size: 28px 28px;
+      animation: barshimmer 0.9s linear infinite;
+      transition: width 0.8s ease;
+    }
+    .eta { margin-top: 10px; font-size: 12px; color: #6f8377; }
+    .eta .dim { color: #4a5a4f; }
+
+    .divider { margin: 30px 0 22px; border-top: 1px dashed var(--green-soft); }
+
+    .jokes { font-size: 13px; color: #5a7363; line-height: 1.9; }
+    .headline { margin-top: 16px; font-size: 21px; line-height: 1.45; color: #eafff1; font-weight: 700; letter-spacing: -0.01em; }
+    .subtext { margin-top: 6px; font-size: 14px; color: #9fb4a6; line-height: 1.6; }
+
+    .actions { margin-top: 24px; display: flex; flex-wrap: wrap; align-items: center; gap: 16px; }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--green);
+      color: #06210f;
+      font-weight: 800;
+      font-size: 14px;
+      padding: 14px 22px;
+      border-radius: 8px;
+      letter-spacing: 0.01em;
+      box-shadow: 0 12px 30px -12px rgba(94,243,140,0.6);
+      transition: background 0.2s ease, box-shadow 0.2s ease;
+    }
+    .cta:hover { background: #76ffa3; box-shadow: 0 16px 36px -12px rgba(94,243,140,0.8); }
+    .cta .arrow { font-size: 16px; }
+    .email { font-size: 13px; color: var(--green); transition: color 0.2s ease; }
+    .email:hover { color: #76ffa3; }
+
+    .footer { margin-top: 26px; text-align: center; font-size: 12px; color: #54665b; line-height: 1.7; position: relative; z-index: 2; }
+    .footer .company { color: #7d8b80; font-weight: 500; }
+    .footer .comment { color: #3f5046; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .terminal, .fill, .live .pulse, .cursor { animation: none; }
+      .cursor { opacity: 1; }
+    }
+  </style>
 </head>
-<body class="bg-background-light dark:bg-background-dark font-display">
-  <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white text-black px-3 py-2 rounded">Skip to content</a>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
 
-  <div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
-    <div class="layout-container flex h-full grow flex-col">
-      <header class="sticky top-0 z-50 flex items-center justify-between whitespace-nowrap border-b border-solid border-b-gray-200 dark:border-b-[#233648] bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm px-4 sm:px-10 py-3" role="banner">
-        <div class="flex items-center gap-4 text-gray-800 dark:text-white">
-          <div class="size-6 text-primary" aria-hidden="true">
-            <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-              <path d="M4 42.4379C4 42.4379 14.0962 36.0744 24 41.1692C35.0664 46.8624 44 42.2078 44 42.2078L44 7.01134C44 7.01134 35.068 11.6577 24.0031 5.96913C14.0971 0.876274 4 7.27094 4 7.27094L4 42.4379Z" fill="currentColor"></path>
-            </svg>
-          </div>
-          <p class="text-gray-800 dark:text-white text-lg font-bold leading-tight tracking-[-0.015em]">Cerberus Solutions</p>
-        </div>
-
-        <nav class="hidden md:flex flex-1 justify-end gap-8" aria-label="Primary">
-          <div class="flex items-center gap-9">
-            <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#services">Services</a>
-            <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#why-us">Why Us</a>
-            <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#portfolio">Portfolio</a>
-            <a class="text-gray-600 dark:text-gray-300 hover:text-primary dark:hover:text-primary text-sm font-medium leading-normal" href="#contact">Contact</a>
-          </div>
-          <a class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-white text-sm font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors" href="#contact">
-            <span class="truncate">Get a Quote</span>
-          </a>
-        </nav>
-
-        <button class="md:hidden p-2 rounded-lg bg-gray-200 dark:bg-gray-700" aria-label="Open menu">
-          <span class="material-symbols-outlined text-gray-800 dark:text-white" aria-hidden="true">menu</span>
-        </button>
-      </header>
-
-      <main id="main" class="flex-1">
-        <!-- HERO -->
-        <section class="relative h-[900px] w-full" id="hero">
-          <video
-            class="absolute inset-0 w-full h-full object-cover z-0"
-            autoplay
-            loop
-            muted
-            playsinline
-            preload="metadata"
-            poster="./assets/images/hero.jpeg"
-          >
-            <source src="./assets/videos/hero.mp4" type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
-          <div class="absolute inset-0 bg-black/60 z-10" aria-hidden="true"></div>
-
-          <div class="relative z-20 flex flex-col items-center justify-center h-full text-center px-4">
-            <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] sm:text-5xl md:text-6xl">
-              Custom Software Solutions
-            </h1>
-            <p class="mt-4 text-gray-200 text-lg sm:text-xl max-w-3xl mx-auto">
-              We architect, design, and ship production-ready software: modern web platforms, mobile apps, and data-driven dashboards that scale with your business.
-            </p>
-            <ul class="mt-4 text-gray-300 text-sm sm:text-base flex flex-wrap justify-center gap-x-6 gap-y-2">
-              <li>Full-stack development</li>
-              <li>UI/UX & design systems</li>
-              <li>APIs & integrations</li>
-              <li>Analytics & dashboards</li>
-            </ul>
-            <div class="mt-8 flex justify-center gap-4">
-              <a class="flex min-w-[84px] max-w-[480px] items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors" href="#services">
-                <span class="truncate">Explore Services</span>
-              </a>
-              <a class="flex min-w-[84px] max-w-[480px] items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-white/20 text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-white/30 backdrop-blur-sm transition-colors" href="#contact">
-                <span class="truncate">Start a Project</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <!-- SERVICES -->
-        <section class="px-4 py-20 sm:px-10 lg:px-20 bg-gray-100 dark:bg-background-dark" id="services">
-          <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-              <h2 class="text-gray-900 dark:text-white text-3xl sm:text-4xl font-bold leading-tight tracking-[-0.015em]">Services</h2>
-              <p class="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                End-to-end software development — from discovery and UX to deployment, optimization, and support.
-              </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <article class="flex flex-col gap-3 rounded-xl border border-gray-200 dark:border-[#324d67] bg-white dark:bg-[#192633] p-6 text-center items-center" itemscope itemtype="https://schema.org/Service">
-                <div class="p-3 bg-primary/20 rounded-full mb-4" aria-hidden="true">
-                  <span class="material-symbols-outlined text-primary text-4xl">web</span>
-                </div>
-                <h3 class="text-gray-900 dark:text-white text-xl font-bold leading-tight" itemprop="name">Web Development</h3>
-                <p class="text-gray-600 dark:text-[#92adc9] text-sm leading-normal" itemprop="description">
-                  Responsive, accessible web apps using modern stacks (React/Vue, Node.js) with clean APIs, auth, and CI/CD.
-                </p>
-              </article>
-
-              <article class="flex flex-col gap-3 rounded-xl border border-gray-200 dark:border-[#324d67] bg-white dark:bg-[#192633] p-6 text-center items-center" itemscope itemtype="https://schema.org/Service">
-                <div class="p-3 bg-primary/20 rounded-full mb-4" aria-hidden="true">
-                  <span class="material-symbols-outlined text-primary text-4xl">phone_iphone</span>
-                </div>
-                <h3 class="text-gray-900 dark:text-white text-xl font-bold leading-tight" itemprop="name">Mobile App Development</h3>
-                <p class="text-gray-600 dark:text-[#92adc9] text-sm leading-normal" itemprop="description">
-                  Native and cross-platform apps with robust offline handling, secure APIs, analytics, and app-store readiness.
-                </p>
-              </article>
-
-              <article class="flex flex-col gap-3 rounded-xl border border-gray-200 dark:border-[#324d67] bg-white dark:bg-[#192633] p-6 text-center items-center" itemscope itemtype="https://schema.org/Service">
-                <div class="p-3 bg-primary/20 rounded-full mb-4" aria-hidden="true">
-                  <span class="material-symbols-outlined text-primary text-4xl">design_services</span>
-                </div>
-                <h3 class="text-gray-900 dark:text-white text-xl font-bold leading-tight" itemprop="name">UI/UX Design</h3>
-                <p class="text-gray-600 dark:text-[#92adc9] text-sm leading-normal" itemprop="description">
-                  Research-driven UX, wireframes, and design systems that convert — with motion, accessibility, and consistency.
-                </p>
-              </article>
-            </div>
-          </div>
-        </section>
-
-        <!-- WHY US -->
-        <section class="px-4 py-20 sm:px-10 lg:px-20" id="why-us">
-          <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-              <h2 class="text-gray-900 dark:text-white text-3xl sm:text-4xl font-bold leading-tight tracking-[-0.015em]">Why Choose Cerberus Solutions</h2>
-              <p class="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                We partner closely with clients, ship iteratively, and focus on measurable business outcomes.
-              </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <div class="flex items-start gap-4">
-                <div class="p-2 bg-primary/20 rounded-full mt-1" aria-hidden="true"><span class="material-symbols-outlined text-primary text-2xl">groups</span></div>
-                <div>
-                  <h3 class="text-gray-900 dark:text-white text-lg font-bold">Expert Team</h3>
-                  <p class="text-gray-600 dark:text-gray-400 mt-1">Senior engineers with deep experience in backend, frontend, and DevOps.</p>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-4">
-                <div class="p-2 bg-primary/20 rounded-full mt-1" aria-hidden="true"><span class="material-symbols-outlined text-primary text-2xl">sprint</span></div>
-                <div>
-                  <h3 class="text-gray-900 dark:text-white text-lg font-bold">Agile Delivery</h3>
-                  <p class="text-gray-600 dark:text-gray-400 mt-1">Short feedback loops, transparent roadmaps, and predictable releases.</p>
-                </div>
-              </div>
-
-              <div class="flex items-start gap-4">
-                <div class="p-2 bg-primary/20 rounded-full mt-1" aria-hidden="true"><span class="material-symbols-outlined text-primary text-2xl">support_agent</span></div>
-                <div>
-                  <h3 class="text-gray-900 dark:text-white text-lg font-bold">Ongoing Support</h3>
-                  <p class="text-gray-600 dark:text-gray-400 mt-1">We maintain, optimize, and scale your product long after launch.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <!-- PORTFOLIO -->
-        <section class="px-4 py-20 sm:px-10 lg:px-20 bg-gray-100 dark:bg-background-dark" id="portfolio">
-          <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-12">
-              <h2 class="text-gray-900 dark:text-white text-3xl sm:text-4xl font-bold leading-tight tracking-[-0.015em]">Selected Work</h2>
-              <p class="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-                A few examples of platforms and apps we’ve delivered.
-              </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              <figure class="group relative overflow-hidden rounded-lg">
-                <img class="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-300"
-                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaiKeKXBJETpNnAKPnVT0Y81TmMOEJzv5fSxpbuHsTS5yt3ISZZwZzL4aNHfe6NmkA88Ft47Ex2DTkNglnuf2tMYJuSf4Sslpa40GqxU_fkBpx3aE9W5QnulePYTR9Z3qmvlLDhvhWncVj4fyTiFous0uaFt8Hb26pwv-1YD7j78x-Z97-e1hvvLhM2TNViynvBJ3seI2x2tqODQb2rGUfJzJzY811uuzP-gJKnQwHK1CXwuv9_fShSif594F_y478srzakdZgBB5e"
-                     alt="E-commerce storefront interface on a laptop beside a coffee." />
-                <figcaption class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300 flex flex-col justify-end p-4">
-                  <h3 class="text-white text-lg font-bold">E-Commerce Platform</h3>
-                  <p class="text-gray-300 text-sm">Scalable storefront with custom CMS and payments.</p>
-                </figcaption>
-              </figure>
-
-              <figure class="group relative overflow-hidden rounded-lg">
-                <img class="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-300"
-                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-d_aZQkLELLIwXra8lmBuKzo5nikVPwxeXgA9OG275r8ahP2BRKVK2P9A6K55msibg4mVR7H10rMOVspi6zkDgmNDCjRhRvzikUy8lcom4ohk2x12Wx15Ilzo83zsUIUEzyfMX7P4FwJSibFc3VCoyAsieTnUl5FcmFKIMTeBadLoSnml0uFnaws1a-gquZNCezK7b-C34CcMu_8QHouLOlT1Nhb-Yk5LiQpku2H0mjLcLoeEh4la475tKjHb2-mTbPK1P7azgSiZ"
-                     alt="Analytics dashboard with charts and KPIs on a desktop screen." />
-                <figcaption class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300 flex flex-col justify-end p-4">
-                  <h3 class="text-white text-lg font-bold">Data Analytics Dashboard</h3>
-                  <p class="text-gray-300 text-sm">Interactive BI with role-based access and reporting.</p>
-                </figcaption>
-              </figure>
-
-              <figure class="group relative overflow-hidden rounded-lg">
-                <img class="w-full h-64 object-cover transform group-hover:scale-105 transition-transform duration-300"
-                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtLwkLbFgJkTWvTgqLRP9LfaPNLG8G_r_cWsIDGif3ktduCAfJAxJQ1izPuPAz_oBQExFQZVY5R6GHMIfdnOmMxyvZlXzQVWlNDI72jZpWmnDtPna3P2PMeh4D6tqC4Vji5_kaOHFjATaPqt3hD0MiprtxiM6INK6-wLTGWvyUwX2c2zRpg5hnsQ1Tecfb5OORZ3BGUaeqYoVeWkkd8p7NBRq42JhYoqkK4vltMPRtCBda_0nrjedinhNhrEWGE3mEuvr2GznNwpE5"
-                     alt="Mobile banking app UI on a smartphone." />
-                <figcaption class="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors duration-300 flex flex-col justify-end p-4">
-                  <h3 class="text-white text-lg font-bold">Mobile Banking App</h3>
-                  <p class="text-gray-300 text-sm">Secure mobile banking with KYC, notifications, and cards.</p>
-                </figcaption>
-              </figure>
-            </div>
-          </div>
-        </section>
-
-        <!-- CONTACT -->
-        <section class="px-4 py-20 sm:px-10 lg:px-20" id="contact">
-          <div class="max-w-3xl mx-auto text-center">
-            <h2 class="text-gray-900 dark:text-white text-3xl sm:text-4xl font-bold leading-tight tracking-[-0.015em]">Get in Touch</h2>
-            <p class="mt-4 text-gray-600 dark:text-gray-400">
-              Ready to start your next project? Tell us about your goals and timeline.
-            </p>
-
-            <div class="mt-12 flex flex-col sm:flex-row justify-center items-center gap-8 sm:gap-12 text-left">
-              <div class="flex items-center gap-4">
-                <span class="material-symbols-outlined text-primary text-3xl" aria-hidden="true">mail</span>
-                <div>
-                  <h3 class="text-gray-500 dark:text-gray-400 text-sm">Email</h3>
-                  <a class="text-gray-900 dark:text-white font-semibold hover:text-primary dark:hover:text-primary" href="mailto:info@cerberus-solutions.hr">info@cerberus-solutions.hr</a>
-                </div>
-              </div>
-
-              <div class="flex items-center gap-4">
-                <span class="material-symbols-outlined text-primary text-3xl" aria-hidden="true">call</span>
-                <div>
-                  <h3 class="text-gray-500 dark:text-gray-400 text-sm">Phone</h3>
-                  <a class="text-gray-900 dark:text-white font-semibold hover:text-primary dark:hover:text-primary" href="tel:+385955810964">+385 (095) 581-0964</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="mt-12">
-              <p class="text-gray-600 dark:text-gray-400">Follow us:</p>
-              <div class="flex justify-center gap-6 mt-4">
-                <a class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#" aria-label="Facebook">
-                  <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path clip-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" fill-rule="evenodd"></path>
-                  </svg>
-                </a>
-                <a class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#" aria-label="X">
-                  <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.71v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84"></path>
-                  </svg>
-                </a>
-                <a class="text-gray-500 dark:text-gray-400 hover:text-primary dark:hover:text-primary transition-colors" href="#" aria-label="GitHub">
-                  <svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
-                    <path clip-rule="evenodd" fill-rule="evenodd" d="M12 2C6.475 2 2 6.588 2 12.253c0 4.537 2.865 8.38 6.839 9.736.5.094.682-.223.682-.494 0-.241-.01-.883-.013-1.728-2.782.615-3.369-1.362-3.369-1.362-.454-1.173-1.11-1.484-1.11-1.484-.908-.628.069-.616.069-.616 1.003.071 1.531 1.045 1.531 1.045.892 1.548 2.341 1.101 2.91.84.092-.654.35-1.101.636-1.354-2.22-.256-4.555-1.126-4.555-5.01 0-1.103.39-2.005 1.031-2.711-.103-.256-.446-1.284.098-2.673 0 0 .84-.272 2.75 1.035A9.64 9.64 0 0112 6.85c.85.004 1.705.116 2.504.34 1.909-1.304 2.747-1.034 2.747-1.034.546 1.39.203 2.416.1 2.672.64.708 1.03 1.613 1.03 2.711 0 3.9-2.338 4.753-4.566 5.004.359.313.678.931.678 1.876 0 1.353-.012 2.445-.012 2.778 0 .271.18.587.688.488A10.06 10.06 0 0022 12.253C22 6.588 17.523 2 12 2z"></path>
-                  </svg>
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-
-      <footer class="bg-gray-100 dark:bg-background-dark border-t border-gray-200 dark:border-[#233648]" role="contentinfo">
-        <div class="max-w-7xl mx-auto px-4 sm:px-10 py-6 text-center text-gray-500 dark:text-gray-400 text-sm">
-          © 2025 Cerberus Solutions, d.o.o. All rights reserved.
-        </div>
-      </footer>
+  <main class="terminal" aria-label="Cerberus Solutions">
+    <!-- title bar -->
+    <div class="titlebar">
+      <div class="dots" aria-hidden="true">
+        <span style="background:#ff5f57;"></span>
+        <span style="background:#febc2e;"></span>
+        <span style="background:#28c840;"></span>
+      </div>
+      <div class="name">deploy.sh — cerberus-solutions.hr</div>
+      <div class="live"><span class="pulse" aria-hidden="true"></span>LIVE</div>
     </div>
-  </div>
+
+    <!-- terminal body -->
+    <div class="body">
+      <!-- log -->
+      <div class="log">
+        <div id="log" aria-hidden="true"></div>
+        <div class="active">
+          <span class="prompt">$ </span><span id="active"></span> <span class="spinner" id="spinner">⠋</span><span class="cursor" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <!-- progress -->
+      <div class="progress">
+        <div class="row">
+          <span>building our own website</span>
+          <span class="pct"><span id="pct">87</span>%</span>
+        </div>
+        <div class="track" role="progressbar" aria-label="Build progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="87" id="track">
+          <div class="fill" id="fill" style="width:87%;"></div>
+        </div>
+        <div class="eta">ETA: soon™ <span class="dim">(give or take a few quarters)</span></div>
+      </div>
+
+      <!-- divider -->
+      <div class="divider"></div>
+
+      <!-- punchline -->
+      <div class="jokes">
+        <div>// this page has been "under construction" since 2019.</div>
+        <div>// it is the one project we somehow never ship.</div>
+      </div>
+      <div class="headline">Your website doesn't have to be<br>stuck at <span id="headlinePct">87</span>%.</div>
+      <div class="subtext">
+        We ship everyone else's projects on time — web, mobile, AI, contract. Ours is just… a running gag.
+      </div>
+
+      <div class="actions">
+        <a class="cta" href="mailto:info@cerberus-solutions.hr?subject=Quote%20request&body=Hi%20Cerberus%2C%20I%27d%20like%20a%20quote%20for%3A">
+          <span>$ get --a-quote</span>
+          <span class="arrow">→</span>
+        </a>
+        <a class="email" href="mailto:info@cerberus-solutions.hr">info@cerberus-solutions.hr</a>
+      </div>
+    </div>
+  </main>
+
+  <!-- footer -->
+  <footer class="footer">
+    <div class="company">Cerberus Solutions d.o.o.</div>
+    <div>Quietly building things that actually launch. <span class="comment">// unlike this page</span></div>
+  </footer>
+
+  <script>
+    (function () {
+      var STUCK_AT = 87;     // base progress %
+      var LOG_SPEED_MS = 1500;
+
+      var pool = [
+        { prompt: "$ ", text: "npm run build:our-own-website", color: "#cdebd6" },
+        { prompt: "> ", text: "resolving priorities... done (clients first)", color: "#7d9486" },
+        { prompt: "> ", text: "compiling excuses... 14 warnings", color: "#f5b14c" },
+        { prompt: "> ", text: "bikeshedding the button radius... 4px? 6px? 4px.", color: "#7d9486" },
+        { prompt: "> ", text: "fetching motivation from cache... MISS", color: "#f5b14c" },
+        { prompt: "> ", text: "reticulating splines...", color: "#7d9486" },
+        { prompt: "> ", text: "brewing coffee... 100%", color: "#5ef38c" },
+        { prompt: "> ", text: "git commit -m 'will finish the about page later'", color: "#7d9486" },
+        { prompt: "> ", text: "deferring launch to Q-soon", color: "#f5b14c" },
+        { prompt: "> ", text: "optimizing procrastination... -0.3kb", color: "#7d9486" },
+        { prompt: "> ", text: "checking deadline... it was last year", color: "#f5b14c" },
+        { prompt: "> ", text: "looks great, shipping clients' sites instead", color: "#5ef38c" }
+      ];
+
+      var activePool = [
+        "writing self-deprecating copy",
+        "rebuilding the hero section (again)",
+        "arguing about the favicon",
+        "looking busy",
+        "almost there, promise",
+        "doing literally anything but finishing"
+      ];
+
+      var spinners = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"];
+
+      var logEl = document.getElementById("log");
+      var activeEl = document.getElementById("active");
+      var spinnerEl = document.getElementById("spinner");
+      var pctEl = document.getElementById("pct");
+      var headlinePctEl = document.getElementById("headlinePct");
+      var fillEl = document.getElementById("fill");
+      var trackEl = document.getElementById("track");
+
+      // seed log with first 5 lines
+      var feed = 5;
+      var lines = pool.slice(0, 5);
+      var activeIdx = 0;
+      var spinIdx = 0;
+
+      function renderLog() {
+        logEl.innerHTML = "";
+        for (var i = 0; i < lines.length; i++) {
+          var l = lines[i];
+          var div = document.createElement("div");
+          div.className = "line";
+          div.style.color = l.color;
+          var p = document.createElement("span");
+          p.className = "prompt";
+          p.textContent = l.prompt;
+          div.appendChild(p);
+          div.appendChild(document.createTextNode(l.text));
+          logEl.appendChild(div);
+        }
+      }
+
+      function setPct(value) {
+        pctEl.textContent = value;
+        headlinePctEl.textContent = value;
+        fillEl.style.width = value + "%";
+        trackEl.setAttribute("aria-valuenow", value);
+      }
+
+      renderLog();
+      activeEl.textContent = activePool[0];
+      setPct(STUCK_AT);
+
+      // cycle log lines + active task
+      setInterval(function () {
+        var next = pool[feed % pool.length];
+        feed++;
+        lines.push(next);
+        while (lines.length > 7) lines.shift();
+        renderLog();
+        activeIdx = (activeIdx + 1) % activePool.length;
+        activeEl.textContent = activePool[activeIdx];
+      }, LOG_SPEED_MS);
+
+      // spinner
+      setInterval(function () {
+        spinIdx = (spinIdx + 1) % spinners.length;
+        spinnerEl.textContent = spinners[spinIdx];
+      }, 90);
+
+      // fluctuating percentage (never actually finishes)
+      setInterval(function () {
+        setPct(STUCK_AT + (Math.random() < 0.5 ? 0 : 1));
+      }, 2800);
+    })();
+  </script>
 </body>
 </html>
