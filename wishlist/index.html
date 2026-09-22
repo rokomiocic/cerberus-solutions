@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>January in America</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="48x48" />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #1C1915;
+  --surface: #262320;
+  --surface-hover: #302C27;
+  --surface-border: #3A352E;
+  --amber: #C8973E;
+  --amber-dim: rgba(200,151,62,0.15);
+  --sage: #7A8B6F;
+  --sage-dim: rgba(122,139,111,0.15);
+  --text: #E2DAC9;
+  --text-2: #A39A8A;
+  --text-3: #6D6559;
+  --font: 'Outfit', -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.6;
+  padding: env(safe-area-inset-top, 0px) 0 env(safe-area-inset-bottom, 0px);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* === Masthead === */
+.masthead {
+  padding: 56px 24px 48px;
+  text-align: center;
+  border-bottom: 1px solid var(--surface-border);
+}
+.masthead-route {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-2);
+  letter-spacing: 0.06em;
+  margin-bottom: 16px;
+}
+.masthead-route span { color: var(--amber); }
+.masthead h1 {
+  font-family: var(--font);
+  font-weight: 700;
+  font-size: clamp(32px, 6vw, 52px);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  margin-bottom: 12px;
+}
+.masthead h1 em {
+  font-style: italic;
+  color: var(--amber);
+}
+.masthead-sub {
+  font-size: 15px;
+  font-weight: 300;
+  color: var(--text-2);
+  max-width: 44ch;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* === Sticky filters === */
+.filters-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--bg);
+  border-bottom: 1px solid var(--surface-border);
+  padding: 14px 24px;
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.filters-bar::-webkit-scrollbar { display: none; }
+.chip {
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  background: transparent;
+  color: var(--text-3);
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  flex-shrink: 0;
+}
+.chip:hover { border-color: var(--text-2); color: var(--text-2); }
+.chip.active { background: var(--amber-dim); border-color: var(--amber); color: var(--amber); }
+
+/* === Card grid === */
+.content { max-width: 1120px; margin: 0 auto; padding: 24px 20px 100px; }
+.section-title {
+  font-family: var(--font);
+  font-size: 18px;
+  font-weight: 300;
+  letter-spacing: 0.02em;
+  color: var(--text-2);
+  padding: 28px 0 12px;
+  border-bottom: 1px solid var(--surface-border);
+  margin-bottom: 16px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+  margin-bottom: 8px;
+}
+
+/* === Card === */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: border-color 0.15s ease, opacity 0.2s ease;
+  cursor: default;
+  position: relative;
+}
+.card:hover { border-color: var(--text-3); }
+.card.checked { opacity: 0.4; }
+.card.checked .card-name { text-decoration: line-through; text-decoration-color: var(--amber); }
+.card.hidden { display: none; }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.card-name {
+  font-family: var(--font);
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  line-height: 1.35;
+  flex: 1;
+}
+.card-price {
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--amber);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.card-price.free { color: var(--sage); }
+
+.card-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.tag {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+.tag-tier-easy { background: var(--sage-dim); color: var(--sage); }
+.tag-tier-core { background: var(--amber-dim); color: var(--amber); }
+.tag-tier-premium { background: rgba(180,80,42,0.15); color: #C06A3A; }
+
+.card-note {
+  font-size: 13px;
+  font-weight: 300;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 6px;
+}
+.card-link {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--amber);
+  text-decoration: none;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+.card-link:hover { opacity: 1; }
+.detail-btn {
+  font-family: var(--font);
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text-3);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.15s ease;
+}
+.detail-btn:hover { color: var(--text-2); }
+
+.card-detail {
+  display: none;
+  padding: 14px 16px;
+  background: var(--bg);
+  border-radius: 6px;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--text-2);
+}
+.card-detail.open { display: block; }
+.card-detail strong { color: var(--text); }
+
+.card-check {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--surface-border);
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: transparent;
+  transition: all 0.15s ease;
+  padding: 0;
+}
+.card-check:hover { border-color: var(--sage); }
+.card-check.on { background: var(--sage); border-color: var(--sage); color: var(--bg); font-weight: 700; }
+
+.card-remove {
+  position: absolute;
+  top: 14px;
+  right: 40px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 4px;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--text-3);
+  padding: 0;
+  opacity: 0;
+  transition: all 0.15s ease;
+}
+.card:hover .card-remove { opacity: 1; }
+.card-remove:hover { color: #C06A3A; background: rgba(180,80,42,0.15); }
+
+/* === Add button === */
+.add-card {
+  background: transparent;
+  border: 1.5px dashed var(--surface-border);
+  border-radius: 8px;
+  padding: 32px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  color: var(--text-3);
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.15s ease;
+  min-height: 140px;
+  width: 100%;
+}
+.add-card:hover { border-color: var(--amber); color: var(--amber); }
+.add-card .plus { font-size: 22px; line-height: 1; }
+
+/* === Floating budget widget === */
+.budget {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: var(--surface);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  padding: 14px 20px;
+  z-index: 60;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+  min-width: 180px;
+  transition: transform 0.2s ease;
+}
+.budget:hover { transform: translateY(-2px); }
+.budget-label {
+  font-family: var(--font);
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-3);
+  margin-bottom: 4px;
+}
+.budget-value {
+  font-family: var(--font);
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--amber);
+}
+.budget-count {
+  font-family: var(--font);
+  font-size: 11px;
+  color: var(--text-3);
+  margin-top: 2px;
+}
+
+/* === Modal === */
+.overlay { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); z-index:100; align-items:center; justify-content:center; padding:20px; }
+.overlay.open { display:flex; }
+.panel { background:var(--surface); border:1px solid var(--surface-border); border-radius:10px; padding:28px 24px; width:100%; max-width:460px; max-height:90vh; overflow-y:auto; }
+.panel-title { font-family:var(--font); font-size:20px; font-weight:600; color:var(--text); margin-bottom:20px; }
+.field { margin-bottom:14px; }
+.field-label { display:block; font-family:var(--font); font-size:12px; font-weight:500; color:var(--text-2); margin-bottom:5px; }
+.field input,.field select,.field textarea { width:100%; padding:10px 12px; background:var(--bg); border:1px solid var(--surface-border); border-radius:6px; color:var(--text); font-family:var(--font); font-size:14px; outline:none; transition:border-color .15s ease; }
+.field input:focus,.field select:focus,.field textarea:focus { border-color:var(--amber); }
+.field select { appearance:auto; }
+.field textarea { resize:vertical; min-height:60px; }
+.field-row { display:flex; gap:12px; }
+.field-row .field { flex:1; }
+.panel-actions { display:flex; gap:10px; margin-top:20px; }
+.btn-save { flex:1; padding:11px; background:var(--amber); border:none; border-radius:6px; color:var(--bg); font-family:var(--font); font-size:13px; font-weight:600; cursor:pointer; transition:opacity .15s ease; }
+.btn-save:hover { opacity:.85; }
+.btn-cancel { flex:1; padding:11px; background:transparent; border:1px solid var(--surface-border); border-radius:6px; color:var(--text-2); font-family:var(--font); font-size:13px; font-weight:500; cursor:pointer; transition:all .15s ease; }
+.btn-cancel:hover { border-color:var(--text-3); color:var(--text); }
+
+@media (max-width: 680px) {
+  .masthead { padding: 40px 20px 36px; }
+  .grid { grid-template-columns: 1fr; }
+  .budget { bottom: 16px; right: 16px; left: 16px; min-width: 0; display: flex; align-items: center; gap: 12px; padding: 12px 18px; }
+  .budget-label { margin-bottom: 0; }
+  .budget-value { font-size: 20px; }
+  .budget-count { margin-top: 0; margin-left: auto; }
+  .field-row { flex-direction:column; gap:0; }
+}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="masthead-route">Dalmacija <span>&#8594;</span> United States</div>
+  <h1>January in <em>America</em></h1>
+  <p class="masthead-sub">Camera gear, kitchen finds, clothing, and things worth carrying home. Tick what you intend to buy and watch the total.</p>
+</div>
+
+<div class="filters-bar" id="filters"></div>
+
+<div class="content">
+  <div id="list"></div>
+</div>
+
+<div class="budget" id="budget">
+  <div class="budget-label">Selected total</div>
+  <div class="budget-value">$<span id="total">0</span></div>
+  <div class="budget-count"><span id="count">0</span> of <span id="total-count">82</span></div>
+</div>
+
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeAdd();">
+  <div class="panel">
+    <div class="panel-title">Add to the list</div>
+    <div class="field">
+      <span class="field-label">Item name</span>
+      <input type="text" id="f-name" placeholder="e.g. Peak Design Travel Tripod">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <span class="field-label">Price low ($)</span>
+        <input type="number" id="f-price-lo" placeholder="0" min="0">
+      </div>
+      <div class="field">
+        <span class="field-label">Price high ($)</span>
+        <input type="number" id="f-price-hi" placeholder="0" min="0">
+      </div>
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <span class="field-label">Category</span>
+        <select id="f-cat">
+          <option value="Kitchen">Kitchen</option>
+          <option value="Camera Body">Camera Body</option>
+          <option value="Lenses">Lenses</option>
+          <option value="Accessories" selected>Accessories</option>
+          <option value="Action / Drone">Action / Drone</option>
+          <option value="Photo Workflow">Photo Workflow</option>
+          <option value="Wearable">Wearable</option>
+          <option value="Boots">Boots</option>
+          <option value="Clothing">Clothing</option>
+          <option value="Hiking">Hiking</option>
+          <option value="Tech / EDC">Tech / EDC</option>
+          <option value="Tech / Splurge">Tech / Splurge</option>
+          <option value="Home / Smart">Home / Smart</option>
+          <option value="Tools / Outdoor">Tools / Outdoor</option>
+          <option value="Travel / Packing">Travel / Packing</option>
+          <option value="Personal Care">Personal Care</option>
+          <option value="Pantry / Gifts">Pantry / Gifts</option>
+          <option value="Experiences">Experiences</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="field">
+        <span class="field-label">Tier</span>
+        <select id="f-tier">
+          <option value="easy">Easy win</option>
+          <option value="core" selected>Core pick</option>
+          <option value="premium">Big ticket</option>
+        </select>
+      </div>
+    </div>
+    <div class="field">
+      <span class="field-label">Link (optional)</span>
+      <input type="url" id="f-link" placeholder="https://...">
+    </div>
+    <div class="field">
+      <span class="field-label">Notes (optional)</span>
+      <textarea id="f-note" placeholder="Anything to remember about this item"></textarea>
+    </div>
+    <div class="panel-actions">
+      <button class="btn-save" onclick="saveItem()">Add item</button>
+      <button class="btn-cancel" onclick="closeAdd()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var items = [
+  {cat:"Kitchen",name:"Molcajete",price:[30,45],tier:"easy",note:"Traditional lava-rock mortar and pestle. Heavy — factor into luggage weight, not just price.",link:"https://www.amazon.com/Molcajete-Mexicano-Authentic-Traditional-Embroidered/dp/B09MTC2LQ2",detail:""},
+  {cat:"Kitchen",name:"Victoria Cast-Iron Tortilla Press",price:[25,35],tier:"easy",note:"Small but heavy. An easy win.",link:"https://www.amazon.com/Victoria-TOR-003-FBA_TOR-003-Tortilla-Press/dp/B00HWEIKZO",detail:""},
+  {cat:"Kitchen",name:"Lodge Cast-Iron Skillet 12-inch",price:[25,30],tier:"easy",note:"$25 at any Target, three times that imported. Since you are already going cast-iron with the tortilla press.",link:"https://www.amazon.com/Lodge-Seasoned-Cast-Iron-Skillet/dp/B00006JSUB",detail:""},
+  {cat:"Camera Body",name:"Canon EOS R5 (body only)",price:[2600,2700],tier:"premium",note:"Discontinued by Canon in favor of the R5 Mark II — now sold at a steep discount from its $3,899 launch price. Firmware has matured; early overheating issues are long fixed.",link:"https://www.amazon.com/Canon-Full-Frame-Mirrorless-Megapixel-Processor/dp/B08C68F2DX",detail:"<strong>Why it was discontinued:</strong> ordinary product-cycle retirement, not a defect or recall. Canon shifted focus to the R5 Mark II (2024) and R6 Mark III (2025). Canon will service the R5 well into the 2030s, and it works with every RF lens.<br><br><strong>R5 vs R5 Mark II:</strong> the Mark II has a faster stacked sensor, 30fps burst (vs 20fps), better video (8K/60p RAW vs 8K/30p), and improved autofocus — but costs roughly $1,000 more at street prices and runs hotter with worse battery life. For a budget already stretched across lenses, the original R5 is the better value."},
+  {cat:"Lenses",name:"RF 100–500mm f/4.5–7.1L IS USM",price:[2600,2800],tier:"premium",note:"Wildlife / telephoto workhorse.",link:"https://www.amazon.com/Canon-100-500mm-F4-5-7-1-Super-Telephoto-Lens/dp/B08C6ZRVC5",detail:""},
+  {cat:"Lenses",name:"RF 24–70mm f/2.8L IS USM",price:[2200,2400],tier:"premium",note:"Standard zoom, everyday walk-around lens.",link:"https://www.amazon.com/Canon-USA-3680C002-24-70mm-F2-8/dp/B07WQ54BL8",detail:""},
+  {cat:"Lenses",name:"RF 15–35mm f/2.8L IS USM",price:[2200,2400],tier:"premium",note:"Wide-angle. Body + all three lenses runs $9,500+ — realistically pick one, maybe two.",link:"https://www.amazon.com/Canon-RF-15-35mm-F2-8-USM/dp/B07WFQYJYP",detail:""},
+  {cat:"Accessories",name:"Circular Polarizer Filter",price:[30,80],tier:"easy",note:"Check the filter thread size matches whichever lens you land on.",link:"https://www.amazon.com/Altura-Photo-Professional-Photography-Polarizer/dp/B0083WYDHI",detail:""},
+  {cat:"Accessories",name:"Variable ND Filter",price:[50,90],tier:"core",note:"For video and long exposure work.",link:"https://www.amazon.com/Concept-Variable-Neutral-Adjustable-Cleaning/dp/B00JL4INW8",detail:""},
+  {cat:"Accessories",name:"Nomatic McKinnon Camera Backpack",price:[300,360],tier:"premium",note:"Premium — worth it if you are building out a full kit.",link:"https://www.amazon.com/NOMATIC-McKinnon-Camera-Photographers-Backpack/dp/B085WCGTJ2",detail:""},
+  {cat:"Accessories",name:"Wireless Shutter Release Remote",price:[15,30],tier:"easy",note:"Cheap, useful for long exposure/timelapse. You likely only need one remote — see next.",link:"https://www.amazon.com/Wireless-Shutter-Release-Remote-Control/dp/B07TT2W8P3",detail:""},
+  {cat:"Accessories",name:"Pixel TW-283 Wireless Shutter Remote",price:[60,100],tier:"core",note:"Same function as the remote above — pick one, not both.",link:"https://www.amazon.com/gp/product/B071WRZR25",detail:""},
+  {cat:"Accessories",name:"SanDisk Extreme 128GB SD Card",price:[20,30],tier:"easy",note:"Cheap, easy add regardless of what else you get.",link:"https://www.amazon.com/SANDISK-128GB-Extreme-UHS-I-SDSDXXJ-128G-GSCIN/dp/B0GDQRNTF3",detail:""},
+  {cat:"Accessories",name:"Peak Design Travel Tripod (Aluminum)",price:[360,380],tier:"premium",note:"Packs down to the diameter of a water bottle, 20lb load capacity. Carbon fiber version runs ~$600 if you want to save weight. Essential if you are shooting with the 100–500mm.",link:"https://www.amazon.com/Peak-Design-Travel-Section-Aluminum/dp/B085BQS6K4",detail:""},
+  {cat:"Accessories",name:"Canon LP-E6NH Battery (extra)",price:[60,70],tier:"easy",note:"Genuine Canon spare. Third-party options run $20–30 but genuine is worth it for reliability. The R5 drains fast during video.",link:"https://www.amazon.com/Canon-4132C002-LP-E6NH/dp/B08C6FLH91",detail:""},
+  {cat:"Accessories",name:"SanDisk Extreme PRO CFexpress Type B 128GB",price:[130,180],tier:"core",note:"The R5’s CFexpress slot is where you want to write 8K and high-burst photos. Much faster than the SD slot. Significantly cheaper in the US.",link:"https://www.amazon.com/SanDisk-128GB-Extreme-CFexpress-Card/dp/B085CNSZMC",detail:""},
+  {cat:"Accessories",name:"Camera Sensor Cleaning Kit",price:[15,30],tier:"easy",note:"Small, light, cheap. Changing lenses in the field means dust on the sensor eventually. Grab one while you are shopping.",link:"https://www.amazon.com/Altura-Photo-Professional-Cleaning-Cameras/dp/B01JQQCTQQ",detail:""},
+  {cat:"Action / Drone",name:"GoPro HERO13 Black",price:[400,400],tier:"core",note:"Overlaps heavily with the Insta360 below — pick one, not both.",link:"https://www.amazon.com/GoPro-Limited-HERO13-Black-Polar/dp/B0DYPJ8GK7",detail:""},
+  {cat:"Action / Drone",name:"Insta360 X3",price:[400,450],tier:"core",note:"Same use-case as the GoPro — a decision point, not an add-on.",link:"https://www.amazon.com/insta360-Waterproof-Single-Lens-Stabilization-Touchscreen/dp/B0B9H572LC",detail:""},
+  {cat:"Action / Drone",name:"Insta360 Extended Selfie Stick",price:[20,25],tier:"easy",note:"Only worth it if you get the Insta360.",link:"https://www.amazon.com/Insta360-Extended-Selfie-Action-Camera/dp/B08ZCTD6KW",detail:""},
+  {cat:"Action / Drone",name:"DJI Mini 4 Pro Combo Plus (RC 2)",price:[1000,1100],tier:"premium",note:"Sub-249g — no US drone registration hassle while traveling. Check import rules back home.",link:"https://store.dji.com/product/dji-mini-4-pro-combo-plus-rc-2-sb",detail:""},
+  {cat:"Photo Workflow",name:"Samsung T9 Portable SSD (1TB)",price:[80,130],tier:"core",note:"Pocket-sized field backup for 8K and high-burst RAW files. You will fill cards fast with the R5. US prices are 20–30% less than EU.",link:"https://www.amazon.com/SAMSUNG-Portable-Professionals-MU-PG1T0B-AM/dp/B0CHFSWM2P",detail:""},
+  {cat:"Photo Workflow",name:"Calibrite ColorChecker",price:[60,80],tier:"core",note:"Accurate color reference for wildlife and travel photography. Small, light, lasts forever.",link:"https://www.amazon.com/Calibrite-ColorChecker-Passport-Photo-CCPP2/dp/B0973HSH3V",detail:""},
+  {cat:"Wearable",name:"Ray-Ban Meta Skyler",price:[380,500],tier:"core",note:"Fun, impulse-adjacent — not essential.",link:"https://www.amazon.com/Ray-Ban-Meta-Skyler-Shiny-Glasses/dp/B0FLYHQJ36",detail:""},
+  {cat:"Boots",name:"Ariat Heritage Western R-Toe Boots",price:[170,200],tier:"core",note:"Best value western boot at Bass Pro. Full-grain leather, 4LR comfort footbed, proper cowboy silhouette. Try on in-store — western sizing runs different from regular shoes.",link:"https://www.basspro.com/shop/en/ariat-heritage-western-r-toe-cowboy-boots-for-men",detail:"<strong>Why this one:</strong> Ariat is the #1 brand in equestrian and western footwear — not a fashion brand doing western, but a western brand that looks good. The Heritage R-Toe in distressed brown is comfortable from day one with almost no break-in. At ~$200 it beats Tecovas ($325+) and Thursday ($249) on value while matching or exceeding build quality.<br><br><strong>Alternatives if budget allows:</strong> Tecovas The Cartwright ($375) or The Earl roper ($325) in goat hide for a nicer leather feel. Thursday Maverick ($249) for a sleeker, less traditional look. Try them on in a Tecovas store if you pass one in Texas."},
+  {cat:"Boots",name:"Wrangler Western Boot Socks (3-pack)",price:[12,15],tier:"easy",note:"Grab these at Bass Pro when trying on the Ariats — tall, reinforced heel and toe. You want boot socks on when sizing western boots anyway.",link:"https://www.amazon.com/s?k=wrangler+western+boot+socks+men",detail:""},
+  {cat:"Boots",name:"Darn Tough Boot Midweight Socks",price:[25,30],tier:"core",note:"Merino wool, made in Vermont, lifetime warranty — they replace them forever if they wear out. The buy-it-for-life upgrade over the Wrangler pack.",link:"https://www.amazon.com/s?k=darn+tough+boot+midweight+socks+men",detail:""},
+  {cat:"Boots",name:"Costco Kirkland Merino Wool Socks (4-pack)",price:[15,20],tier:"easy",note:"Legendary value. You would pay $15 per pair for equivalent quality in Croatia. Grab two packs.",link:"https://www.amazon.com/s?k=kirkland+merino+wool+socks+men",detail:""},
+  {cat:"Clothing",name:"Carhartt Watch Hat Beanie",price:[20,25],tier:"easy",note:"Original Carhartt (not the EU WIP line) is dirt cheap in the US. $20 at Tractor Supply or Bass Pro vs $40+ in Croatia.",link:"https://www.amazon.com/s?k=carhartt+watch+hat+beanie+men",detail:""},
+  {cat:"Clothing",name:"Levi's 501s or 505s (x2)",price:[80,120],tier:"core",note:"Literally twice the price in Croatia. January means post-holiday sales. Grab two pairs.",link:"https://www.amazon.com/s?k=levis+501+original+mens",detail:""},
+  {cat:"Clothing",name:"Patagonia Better Sweater or Nano Puff",price:[100,180],tier:"core",note:"Outlet stores in the US regularly have these 30–40% off. Hard to find discounted in Europe.",link:"https://www.amazon.com/s?k=patagonia+better+sweater+mens",detail:""},
+  {cat:"Clothing",name:"Hanes/Fruit of the Loom Plain Tees (6-pack)",price:[15,20],tier:"easy",note:"US multi-pack t-shirt game is unmatched. 6 solid-color heavyweight tees for $18 would cost $60+ in HR buying individually.",link:"https://www.amazon.com/s?k=hanes+mens+t-shirt+6+pack",detail:""},
+  {cat:"Tech / EDC",name:"Apple AirPods Pro",price:[190,230],tier:"core",note:"US-to-EU price gap is $50–80 after VAT. If yours are aging, this is the trip to replace them.",link:"https://www.amazon.com/Apple-Generation-Cancelling-Transparency-Personalized/dp/B0CHWRXH8B",detail:""},
+  {cat:"Tech / EDC",name:"Anker 737 Power Bank (24,000mAh)",price:[80,100],tier:"core",note:"140W output, charges a MacBook. Essential for long days of shooting and travel. Anker US pricing is significantly better than Croatia.",link:"https://www.amazon.com/Anker-PowerCore-Portable-Charger-Compatible/dp/B09VPHVT2Z",detail:""},
+  {cat:"Tech / EDC",name:"Elgato Stream Deck Mini",price:[70,80],tier:"easy",note:"Not just for streaming — custom shortcuts for your IDE, deployment scripts, smart home toggles. Way cheaper in the US.",link:"https://www.amazon.com/Elgato-Stream-Deck-Mini-customizable/dp/B07DYRS1WH",detail:""},
+  {cat:"Tech / EDC",name:"Kindle Paperwhite Signature Edition",price:[150,150],tier:"core",note:"Wireless charging, auto-adjusting light, 32GB. Great travel companion and cheaper stateside.",link:"https://www.amazon.com/All-new-Amazon-Kindle-Paperwhite-Signature/dp/B0CFPP8C33",detail:""},
+  {cat:"Tech / EDC",name:"Olight/Nitecore EDC Flashlight",price:[50,80],tier:"easy",note:"Quality EDC flashlight for garage, property, camping. Enthusiast brands are half the EU price on Amazon US.",link:"https://www.amazon.com/s?k=olight+edc+flashlight",detail:""},
+  {cat:"Tech / EDC",name:"Blue Light Glasses (Zenni Optical)",price:[15,30],tier:"easy",note:"Laughably cheap vs optician prices in Europe. You can order ahead to a US address — Zenni ships fast domestically.",link:"https://www.zennioptical.com/blue-light-glasses",detail:""},
+  {cat:"Tech / EDC",name:"Benchmade or Kershaw Pocket Knife",price:[60,150],tier:"core",note:"US knife prices and selection are unmatched. Same TSA rule as the Leatherman — checked bag only.",link:"https://www.amazon.com/s?k=benchmade+pocket+knife",detail:""},
+  {cat:"Tech / Splurge",name:"Apple Watch Ultra 2",price:[700,780],tier:"premium",note:"Biggest US-vs-EU price gap in Apple’s lineup, usually $100+ cheaper. Only if you actually want one.",link:"https://www.amazon.com/s?k=apple+watch+ultra+2",detail:""},
+  {cat:"Tech / Splurge",name:"Steam Deck",price:[400,500],tier:"premium",note:"Hard to get at retail in Croatia, readily available in the US. The OLED version is the one to get if you go for it.",link:"https://store.steampowered.com/steamdeck",detail:""},
+  {cat:"Home / Smart",name:"Apple HomePod Mini",price:[99,99],tier:"easy",note:"Good starting point for smart home. Overpriced or limited-stock in Croatia.",link:"https://www.amazon.com/s?k=apple+homepod+mini",detail:""},
+  {cat:"Home / Smart",name:"Amazon Echo Show",price:[80,90],tier:"easy",note:"Alternative to HomePod if you prefer Alexa. Kitchen display, smart home hub, video calls.",link:"https://www.amazon.com/s?k=echo+show+8",detail:""},
+  {cat:"Home / Smart",name:"Smart Plugs (TP-Link Kasa or Meross, 4-pack)",price:[15,25],tier:"easy",note:"Dirt cheap in the US, hard to find affordably in HR. Essential if you go the HomePod/Echo route.",link:"https://www.amazon.com/s?k=tp-link+kasa+smart+plug+4+pack",detail:""},
+  {cat:"Tools / Outdoor",name:"Leatherman Wave+",price:[100,100],tier:"core",note:"Gold-standard multitool, roughly half EU price. Useful on the property, hiking, general life. Goes in checked luggage — TSA will confiscate it from carry-on.",link:"https://www.amazon.com/s?k=leatherman+wave+plus",detail:""},
+  {cat:"Tools / Outdoor",name:"Milwaukee/DeWalt Impact Driver (bare tool)",price:[100,150],tier:"core",note:"US pricing on power tools is insane compared to Croatia. A bare-tool impact driver weighs nothing and fits in a bag. Check voltage compatibility (US tools are often 120V for corded — go cordless).",link:"https://www.amazon.com/s?k=dewalt+impact+driver+bare+tool",detail:""},
+  {cat:"Tools / Outdoor",name:"YETI Rambler Tumbler",price:[30,40],tier:"easy",note:"Cult-status insulated tumbler. Costs double in Europe when you can even find one.",link:"https://www.amazon.com/s?k=yeti+rambler+tumbler+30oz",detail:""},
+  {cat:"Travel / Packing",name:"Eagle Creek Packing Cubes",price:[20,35],tier:"easy",note:"Compress your clothes and free up bag space for all the gear you are bringing back. A lifesaver for this trip specifically.",link:"https://www.amazon.com/s?k=eagle+creek+packing+cubes",detail:""},
+  {cat:"Travel / Packing",name:"Duffel Bag (TJ Maxx / Ross)",price:[30,60],tier:"easy",note:"Buy a cheap but solid duffel once you see how much you have accumulated. Way cheaper than paying overweight baggage fees.",link:"",detail:""},
+  {cat:"Personal Care",name:"CeraVe Skincare (cleanser + moisturizer + SPF)",price:[30,45],tier:"easy",note:"CeraVe moisturizer is $15 in the US, $25+ in Croatia. Stock up on cleanser, PM lotion, and SPF — travels well, lasts months.",link:"https://www.amazon.com/s?k=cerave+skincare+set",detail:""},
+  {cat:"Personal Care",name:"Advil / Ibuprofen Bulk Bottle (200ct)",price:[10,10],tier:"easy",note:"200-count bottle costs what you would pay for a 20-pack at a ljekarna. Same logic for Tylenol.",link:"https://www.amazon.com/s?k=advil+200+count",detail:""},
+  {cat:"Personal Care",name:"Dr. Bronner's Castile Soap (32oz)",price:[10,15],tier:"easy",note:"Multi-use, concentrated, lasts forever. Hard to find and expensive in HR.",link:"https://www.amazon.com/s?k=dr+bronners+castile+soap+32oz",detail:""},
+  {cat:"Personal Care",name:"Harry's Razor Starter Kit",price:[15,20],tier:"easy",note:"Quality razors at drugstore prices, not really available in Croatia.",link:"https://www.amazon.com/s?k=harrys+razor+starter+kit",detail:""},
+  {cat:"Pantry / Gifts",name:"Trader Joe's Seasoning Haul",price:[20,30],tier:"easy",note:"Everything But The Bagel, Umami Mushroom, Chili Lime — tiny, lightweight, impossible to get in Croatia. Great gifts too.",link:"https://www.traderjoes.com/home/products/category/seasonings-and-spices",detail:""},
+  {cat:"Pantry / Gifts",name:"American Hot Sauces (Cholula, Valentina, Yellowbird)",price:[15,25],tier:"easy",note:"All under $5–8 each. Pairs perfectly with the molcajete and tortilla press on your list. Wrap in ziplock bags in checked luggage.",link:"https://www.amazon.com/s?k=cholula+valentina+hot+sauce",detail:""},
+  {cat:"Pantry / Gifts",name:"Beeswax Wraps or Stasher Silicone Bags",price:[10,15],tier:"easy",note:"Small, useful, very American wellness aisle energy. Good gifts.",link:"https://www.amazon.com/s?k=stasher+silicone+bags",detail:""},
+  {cat:"Experiences",name:"B&H Photo Video (NYC)",price:[0,0],tier:"easy",note:"The legendary camera store. Handle the lenses in person before committing. No sales tax on most items if shipped out of state. Free to visit — dangerous for your wallet.",link:"https://www.bhphotovideo.com",detail:""},
+  {cat:"Experiences",name:"Costco Membership",price:[65,65],tier:"easy",note:"Worth it for Kirkland socks, bulk electronics, and the $1.50 hot dog. Some locations sell Canon gear too.",link:"https://www.costco.com/join-costco.html",detail:""},
+  {cat:"Experiences",name:"Micro Center Visit",price:[0,0],tier:"easy",note:"Developer paradise. SSDs, cables, Raspberry Pis, Arduino kits, networking gear — all at prices that make you angry about European retail. Check if there is one near where you are staying.",link:"https://www.microcenter.com",detail:""},
+  {cat:"Clothing",name:"Patagonia R1 Air Full-Zip",price:[130,150],tier:"core",note:"Best midlayer on the market. Grid fleece that breathes when moving, insulates when stopped. Works under a shell on trail and over a tee in town. Consider swapping this for the Better Sweater — the R1 is the real hiker pick.",link:"https://www.amazon.com/s?k=patagonia+r1+air+full+zip+men",detail:""},
+  {cat:"Clothing",name:"Arc'teryx Atom Hoody",price:[200,260],tier:"premium",note:"Synthetic insulated jacket. Midlayer in winter, standalone in shoulder seasons. Packs down small. US price is $40–60 less than EU.",link:"https://www.amazon.com/s?k=arcteryx+atom+hoody+men",detail:""},
+  {cat:"Clothing",name:"Outdoor Research Ferrosi Pants",price:[80,90],tier:"core",note:"Crossover hiking pant that doesn't look like hiking pants. Stretchy, durable, dry fast, slim enough for town. Two pairs of these + the Levi's covers everything.",link:"https://www.amazon.com/s?k=outdoor+research+ferrosi+pants+men",detail:""},
+  {cat:"Clothing",name:"Smartwool/Icebreaker Merino Wool T-Shirts (x2–3)",price:[120,240],tier:"core",note:"Don't stink after a day on the trail. One merino tee replaces three cotton tees in your pack. Buy 2–3.",link:"https://www.amazon.com/s?k=smartwool+merino+t+shirt+men",detail:""},
+  {cat:"Clothing",name:"Darn Tough Hiking Socks (x3–4 pairs)",price:[66,112],tier:"core",note:"Hiker Micro Crew or Boot Cushion. Lifetime warranty. Buy 3–4 pairs and you are set for years.",link:"https://www.amazon.com/s?k=darn+tough+hiker+micro+crew+men",detail:""},
+  {cat:"Clothing",name:"Arcade or Grip6 Belt",price:[30,40],tier:"easy",note:"Stretchy, no metal (TSA friendly), works with hiking pants and jeans. These don't exist in Croatia.",link:"https://www.amazon.com/s?k=arcade+adventure+belt",detail:""},
+  {cat:"Clothing",name:"Flint and Tinder Flannel Shirt",price:[80,100],tier:"core",note:"American-made heavyweight flannel from Huckberry. The kind of shirt that looks great for 10 years. Not available outside the US.",link:"https://huckberry.com/store/flint-and-tinder",detail:""},
+  {cat:"Clothing",name:"REI Co-op Brand (January Clearance)",price:[50,150],tier:"core",note:"REI house brand is excellent for the price. January clearance = 30–50% off base layers, hiking shirts, rain shells. Browse in-store.",link:"https://www.rei.com/b/rei-co-op",detail:""},
+  {cat:"Clothing",name:"Merino Wool Base Layers (Smartwool or Icebreaker)",price:[60,120],tier:"core",note:"30–40% cheaper in the US. Great for hiking, travel, and Croatian winters. Top and bottom set.",link:"https://www.amazon.com/s?k=smartwool+merino+250+base+layer+men",detail:""},
+  {cat:"Hiking",name:"Salomon X Ultra 4 or Hoka Speedgoat",price:[130,160],tier:"core",note:"Lighter than boots, better on mixed terrain, dry fast. $20–40 cheaper in the US. Try on at REI.",link:"https://www.amazon.com/s?k=salomon+x+ultra+4+men",detail:""},
+  {cat:"Hiking",name:"Osprey Talon 22 Daypack",price:[120,140],tier:"core",note:"Dedicated hiking daypack for when you are not carrying the full camera kit. Lifetime All Mighty Guarantee — Osprey fixes or replaces any pack, any reason, forever.",link:"https://www.amazon.com/s?k=osprey+talon+22",detail:""},
+  {cat:"Hiking",name:"Hydration Bladder (Osprey Hydraulics 2L)",price:[30,40],tier:"easy",note:"Fits in the Talon or the Nomatic backpack. Way better than carrying water bottles on a 6-hour hike with camera gear.",link:"https://www.amazon.com/s?k=osprey+hydraulics+2l+reservoir",detail:""},
+  {cat:"Hiking",name:"Black Diamond Distance Carbon Z Trekking Poles",price:[150,170],tier:"core",note:"Z-fold poles that collapse to 13 inches. Fit inside a pack. Carbon fiber versions are $30–50 less in the US.",link:"https://www.amazon.com/s?k=black+diamond+distance+carbon+z",detail:""},
+  {cat:"Hiking",name:"Buff Merino Wool Neck Gaiter",price:[20,25],tier:"easy",note:"Sun protection, wind protection, dust mask on dry trails. Weighs nothing, packs into a pocket.",link:"https://www.amazon.com/s?k=buff+merino+wool+neck+gaiter",detail:""},
+  {cat:"Hiking",name:"Petzl Actik Core Headlamp",price:[50,60],tier:"core",note:"Rechargeable via USB-C, 600 lumens, red light mode for night photography. Doubles as a light painting tool or pre-dawn trailhead lamp.",link:"https://www.amazon.com/s?k=petzl+actik+core+headlamp",detail:""},
+  {cat:"Hiking",name:"Sea to Summit Sleeping Bag Liner",price:[40,60],tier:"easy",note:"Adds 10–15°F to any sleeping bag, keeps it clean, works standalone in huts. Packs to the size of a fist.",link:"https://www.amazon.com/s?k=sea+to+summit+reactor+sleeping+bag+liner",detail:""},
+  {cat:"Hiking",name:"Sawyer Squeeze Water Filter",price:[30,35],tier:"easy",note:"The standard for backpacking water filtration. Weighs 3oz, filters 100,000 gallons. Almost impossible to find in Croatia.",link:"https://www.amazon.com/s?k=sawyer+squeeze+water+filter",detail:""},
+  {cat:"Tech / EDC",name:"Garmin inReach Mini 2",price:[300,350],tier:"premium",note:"Satellite messenger for backcountry hiking. Two-way texting and SOS off-grid. Genuine safety device for remote areas like Velebit. Much cheaper in the US.",link:"https://www.amazon.com/s?k=garmin+inreach+mini+2",detail:""},
+  {cat:"Tech / EDC",name:"Rode Wireless GO II",price:[250,280],tier:"core",note:"Compact wireless mic system for video with the R5. Two transmitters, one receiver. Essential for clean outdoor audio. US pricing is $30–50 less.",link:"https://www.amazon.com/s?k=rode+wireless+go+ii",detail:""},
+  {cat:"Tech / EDC",name:"Baofeng UV-5R Radio",price:[25,30],tier:"easy",note:"Receives weather alerts and emergency frequencies while hiking in the US. Also useful as a general handheld radio on the property.",link:"https://www.amazon.com/s?k=baofeng+uv-5r",detail:""},
+  {cat:"Tech / EDC",name:"USB-C Cable Kit (Anker 5-pack)",price:[15,20],tier:"easy",note:"Various lengths. You need them for the power bank, camera, Kindle, headlamp, everything. A 5-pack costs what one cable costs at Sancta Domenica.",link:"https://www.amazon.com/s?k=anker+usb+c+cable+5+pack",detail:""},
+  {cat:"Tech / EDC",name:"USB-C SD Card Reader (Anker/Kingston)",price:[12,15],tier:"easy",note:"For offloading photos to the SSD in the field. Small, cheap, essential with the photo workflow you are building.",link:"https://www.amazon.com/s?k=anker+usb+c+sd+card+reader",detail:""}
+];
+
+var categories = ["All"];
+var seen = {};
+for (var i = 0; i < items.length; i++) {
+  if (!seen[items[i].cat]) { categories.push(items[i].cat); seen[items[i].cat] = true; }
+}
+var checked = {};
+var activeFilter = "All";
+var filtersEl = document.getElementById("filters");
+var listEl = document.getElementById("list");
+var totalEl = document.getElementById("total");
+var countEl = document.getElementById("count");
+document.getElementById("total-count").textContent = items.length;
+
+function mid(r) { return Math.round((r[0] + r[1]) / 2); }
+function fmt(n) { return n.toLocaleString("en-US"); }
+
+function renderFilters() {
+  filtersEl.innerHTML = "";
+  for (var c = 0; c < categories.length; c++) {
+    var btn = document.createElement("button");
+    btn.className = "chip" + (categories[c] === activeFilter ? " active" : "");
+    btn.textContent = categories[c];
+    btn.setAttribute("data-cat", categories[c]);
+    btn.onclick = function() {
+      activeFilter = this.getAttribute("data-cat");
+      renderFilters();
+      renderList();
+    };
+    filtersEl.appendChild(btn);
+  }
+}
+
+function renderList() {
+  listEl.innerHTML = "";
+  var grouped = {};
+  var catOrder = [];
+  for (var i = 0; i < items.length; i++) {
+    var item = items[i];
+    if (activeFilter !== "All" && item.cat !== activeFilter) continue;
+    if (!grouped[item.cat]) { grouped[item.cat] = []; catOrder.push(item.cat); }
+    grouped[item.cat].push({item: item, idx: i});
+  }
+  for (var g = 0; g < catOrder.length; g++) {
+    var cat = catOrder[g];
+    if (activeFilter === "All") {
+      var title = document.createElement("div");
+      title.className = "section-title";
+      title.textContent = cat;
+      listEl.appendChild(title);
+    }
+    var grid = document.createElement("div");
+    grid.className = "grid";
+    var entries = grouped[cat];
+    for (var e = 0; e < entries.length; e++) {
+      var item = entries[e].item;
+      var idx = entries[e].idx;
+      var card = document.createElement("div");
+      card.className = "card" + (checked[idx] ? " checked" : "");
+
+      var chk = document.createElement("button");
+      chk.className = "card-check" + (checked[idx] ? " on" : "");
+      chk.innerHTML = "✓";
+      chk.setAttribute("data-idx", idx);
+      chk.onclick = function(ev) {
+        ev.stopPropagation();
+        var id = parseInt(this.getAttribute("data-idx"));
+        if (checked[id]) { delete checked[id]; } else { checked[id] = true; }
+        renderList();
+        updateTotal();
+      };
+
+      var priceLabel = item.price[0] === 0 && item.price[1] === 0
+        ? "Free"
+        : item.price[0] === item.price[1]
+          ? "$" + item.price[0]
+          : "$" + item.price[0] + "–" + item.price[1];
+
+      var tierLabels = {easy: "Easy win", core: "Core pick", premium: "Big ticket"};
+
+      var html = '<div class="card-top"><div class="card-name">' + item.name + '</div><div class="card-price' + (priceLabel === "Free" ? " free" : "") + '">' + priceLabel + '</div></div>';
+      html += '<div class="card-tags"><span class="tag tag-tier-' + item.tier + '">' + tierLabels[item.tier] + '</span></div>';
+      if (item.note) html += '<div class="card-note">' + item.note + '</div>';
+      html += '<div class="card-footer">';
+      if (item.link) {
+        var store = "View link";
+        if (item.link.indexOf("amazon.com") > -1) store = "Amazon";
+        else if (item.link.indexOf("basspro.com") > -1) store = "Bass Pro";
+        else if (item.link.indexOf("dji.com") > -1) store = "DJI Store";
+        else if (item.link.indexOf("bhphoto") > -1) store = "B&H Photo";
+        else if (item.link.indexOf("microcenter") > -1) store = "Micro Center";
+        html += '<a class="card-link" href="' + item.link + '" target="_blank" rel="noopener">' + store + ' ↗</a>';
+      }
+      if (item.detail) {
+        html += '<button class="detail-btn" data-idx="' + idx + '">More detail</button>';
+      }
+      html += '</div>';
+      if (item.detail) {
+        html += '<div class="card-detail" id="detail-' + idx + '">' + item.detail + '</div>';
+      }
+
+      var body = document.createElement("div");
+      body.innerHTML = html;
+      while (body.firstChild) card.appendChild(body.firstChild);
+      card.appendChild(chk);
+
+      var rem = document.createElement("button");
+      rem.className = "card-remove";
+      rem.innerHTML = "×";
+      rem.setAttribute("data-idx", idx);
+      rem.setAttribute("title", "Remove item");
+      rem.onclick = function(ev) {
+        ev.stopPropagation();
+        var id = parseInt(this.getAttribute("data-idx"));
+        removeItem(id);
+      };
+      card.appendChild(rem);
+
+      grid.appendChild(card);
+    }
+    // Add button at end of last grid
+    if (g === catOrder.length - 1) {
+      var addBtn = document.createElement("button");
+      addBtn.className = "add-card";
+      addBtn.onclick = openAdd;
+      addBtn.innerHTML = '<span class="plus">+</span> Add item';
+      grid.appendChild(addBtn);
+    }
+    listEl.appendChild(grid);
+  }
+  // If empty
+  if (catOrder.length === 0) {
+    var addBtn = document.createElement("button");
+    addBtn.className = "add-card";
+    addBtn.onclick = openAdd;
+    addBtn.innerHTML = '<span class="plus">+</span> Add item';
+    listEl.appendChild(addBtn);
+  }
+
+  var detailBtns = listEl.querySelectorAll(".detail-btn");
+  for (var t = 0; t < detailBtns.length; t++) {
+    detailBtns[t].onclick = function(ev) {
+      ev.stopPropagation();
+      var d = document.getElementById("detail-" + this.getAttribute("data-idx"));
+      if (d.className.indexOf("open") > -1) {
+        d.className = "card-detail";
+        this.textContent = "More detail";
+      } else {
+        d.className = "card-detail open";
+        this.textContent = "Less";
+      }
+    };
+  }
+}
+
+function updateTotal() {
+  var sum = 0; var cnt = 0;
+  for (var k in checked) {
+    if (checked[k]) { sum += mid(items[k].price); cnt++; }
+  }
+  totalEl.textContent = "$" + fmt(sum);
+  countEl.textContent = cnt;
+}
+
+function removeItem(idx) {
+  items.splice(idx, 1);
+  var newChecked = {};
+  for (var k in checked) {
+    var ki = parseInt(k);
+    if (ki < idx) newChecked[ki] = true;
+    else if (ki > idx) newChecked[ki - 1] = true;
+  }
+  checked = newChecked;
+  rebuildCategories();
+  document.getElementById("total-count").textContent = items.length;
+  renderFilters();
+  renderList();
+  updateTotal();
+}
+
+function rebuildCategories() {
+  categories = ["All"]; seen = {};
+  for (var i = 0; i < items.length; i++) {
+    if (!seen[items[i].cat]) { categories.push(items[i].cat); seen[items[i].cat] = true; }
+  }
+}
+
+function openAdd() { document.getElementById("overlay").className = "overlay open"; document.getElementById("f-name").focus(); }
+function closeAdd() {
+  document.getElementById("overlay").className = "overlay";
+  document.getElementById("f-name").value = "";
+  document.getElementById("f-price-lo").value = "";
+  document.getElementById("f-price-hi").value = "";
+  document.getElementById("f-link").value = "";
+  document.getElementById("f-note").value = "";
+}
+
+function saveItem() {
+  var name = document.getElementById("f-name").value.trim();
+  if (!name) { document.getElementById("f-name").style.borderColor = "#C06A3A"; return; }
+  document.getElementById("f-name").style.borderColor = "";
+  var lo = parseInt(document.getElementById("f-price-lo").value) || 0;
+  var hi = parseInt(document.getElementById("f-price-hi").value) || lo;
+  if (hi < lo) hi = lo;
+  items.push({
+    cat: document.getElementById("f-cat").value,
+    name: name,
+    price: [lo, hi],
+    tier: document.getElementById("f-tier").value,
+    note: document.getElementById("f-note").value.trim() || "",
+    link: document.getElementById("f-link").value.trim() || "",
+    detail: ""
+  });
+  rebuildCategories();
+  document.getElementById("total-count").textContent = items.length;
+  renderFilters(); renderList(); closeAdd();
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+document.addEventListener("keydown", function(e) { if (e.key === "Escape") closeAdd(); });
+
+renderFilters();
+renderList();
+updateTotal();
+</script>
+</body>
+</html>
